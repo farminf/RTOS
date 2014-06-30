@@ -42,6 +42,7 @@ public class QueryViewer extends Activity {
                 int period = cursor.getInt(DBAdapter.COL_PERIOD);
                 int deadline = cursor.getInt(DBAdapter.COL_DEADLINE);
                 int AbDeadline = cursor.getInt(DBAdapter.COL_AbDEADLINE);
+                //String minTaskName = myDb.findMin();
 
 
 
@@ -53,8 +54,11 @@ public class QueryViewer extends Activity {
                         +", Period =" + period
                         +", deadline =" + deadline
                         +", AbDeadline =" + AbDeadline
+                        //+", task with minimum period time =" + minTaskName
                         +"\n";
+
             } while(cursor.moveToNext());
+
         }
         cursor.close();
         query.setText(message);

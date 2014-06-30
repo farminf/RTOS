@@ -132,10 +132,28 @@ public class DBAdapter {
 	}
 
     public boolean deleteRowByName(String name) {
-        String where = TASK_NAME + "=" + name;
+        String where = TASK_NAME + " = " + '"' + name + '"' ;
         return db.delete(DATABASE_TABLE, where, null) != 0;
     }
-	
+
+    public Cursor findMinT(){
+        //int value = 6;
+        //String statement = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_PERIOD + " = " + value;
+        //String where = "min(" + COL_PERIOD +")" ;
+        //Cursor c = db.query(true, DATABASE_TABLE, ALL_KEYS,
+              //  null, null, null, null, null, null);
+        //String name = cursor.getString(DBAdapter.COL_NAME);
+        //c.moveToFirst();  //ADD THIS!
+        //int rowID = c.getInt(0);
+        String statement = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_PERIOD +
+                " = (SELECT MIN(" + TASK_PERIOD + ") FROM " + DATABASE_TABLE + ")";
+        Cursor cursor = db.rawQuery(statement, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor ;
+    }
+
 	public void deleteAll() {
 		Cursor c = getAllRows();
 		long rowId = c.getColumnIndexOrThrow(KEY_ROWID);
