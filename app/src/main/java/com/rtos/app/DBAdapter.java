@@ -29,6 +29,8 @@ public class DBAdapter {
 	public static final String TASK_COMPUTATION = "computation";
     public static final String TASK_PERIOD = "period";
     public static final String TASK_DEADLINE = "deadline";
+    public static final String TASK_AbDEADLINE = "Abdeadline";
+
 
 
     // TODO: Setup your field numbers here (0 = KEY_ROWID, 1=...)
@@ -37,17 +39,19 @@ public class DBAdapter {
 	public static final int COL_COMPUTATION = 3;
     public static final int COL_PERIOD = 4;
     public static final int COL_DEADLINE = 5;
+    public static final int COL_AbDEADLINE = 6;
+
 
 
 
     public static final String[] ALL_KEYS = new String[] {KEY_ROWID, TASK_NAME, TASK_START, TASK_COMPUTATION
-            ,TASK_PERIOD ,TASK_DEADLINE};
+            ,TASK_PERIOD ,TASK_DEADLINE ,TASK_AbDEADLINE};
 	
 	// DB info: it's name, and the table we are using (just one).
 	public static final String DATABASE_NAME = "MyDb";
 	public static final String DATABASE_TABLE = "mainTable";
 	// Track DB version if a new version of your app changes the format.
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 2;
 	
 	private static final String DATABASE_CREATE_SQL = 
 			"create table " + DATABASE_TABLE 
@@ -67,9 +71,11 @@ public class DBAdapter {
 			+ TASK_START + " integer not null, "
 			+ TASK_COMPUTATION + " integer not null,"
             + TASK_PERIOD + " integer not null,"
-            + TASK_DEADLINE + " integer not null"
-			
-			// Rest  of creation:
+            + TASK_DEADLINE + " integer not null,"
+            + TASK_AbDEADLINE + " integer not null"
+
+
+                    // Rest  of creation:
 			+ ");";
 	
 	// Context of application who uses us.
@@ -99,7 +105,7 @@ public class DBAdapter {
 	}
 	
 	// Add a new set of values to the database.
-	public long insertRow(String taskName, int start, int computation , int period, int deadline) {
+	public long insertRow(String taskName, int start, int computation , int period, int deadline , int AbDeadline) {
 		/*
 		 * CHANGE 3:
 		 */		
@@ -112,6 +118,8 @@ public class DBAdapter {
 		initialValues.put(TASK_COMPUTATION, computation);
         initialValues.put(TASK_PERIOD, period);
         initialValues.put(TASK_DEADLINE, deadline);
+        initialValues.put(TASK_AbDEADLINE, AbDeadline);
+
 
         // Insert it into the database.
 		return db.insert(DATABASE_TABLE, null, initialValues);
@@ -122,6 +130,11 @@ public class DBAdapter {
 		String where = KEY_ROWID + "=" + rowId;
 		return db.delete(DATABASE_TABLE, where, null) != 0;
 	}
+
+    public boolean deleteRowByName(String name) {
+        String where = TASK_NAME + "=" + name;
+        return db.delete(DATABASE_TABLE, where, null) != 0;
+    }
 	
 	public void deleteAll() {
 		Cursor c = getAllRows();
@@ -157,7 +170,7 @@ public class DBAdapter {
 	}
 	
 	// Change an existing row to be equal to new data.
-	public boolean updateRow(long rowId, String taskName, int start, int computation , int period , int deadline) {
+	public boolean updateRow(long rowId, String taskName, int start, int computation , int period , int deadline , int AbDeadline) {
 		String where = KEY_ROWID + "=" + rowId;
 
 		/*
@@ -172,6 +185,8 @@ public class DBAdapter {
 		newValues.put(TASK_COMPUTATION, computation);
         newValues.put(TASK_PERIOD, period);
         newValues.put(TASK_DEADLINE, deadline);
+        newValues.put(TASK_AbDEADLINE, AbDeadline);
+
 
         // Insert it into the database.
 		return db.update(DATABASE_TABLE, newValues, where, null) != 0;

@@ -40,6 +40,10 @@ public class MainActivity extends Activity {
     int computeD;
     int periodD;
     int deadlineD;
+    int AbDeadlineA;
+    int AbDeadlineB;
+    int AbDeadlineC;
+    int AbDeadlineD;
 
 
     @Override
@@ -125,27 +129,35 @@ public class MainActivity extends Activity {
                 computeA = Integer.parseInt(Acomputation.getText().toString());
                 periodA= Integer.parseInt(Aperiod.getText().toString());
                 deadlineA = Integer.parseInt(Adeadline.getText().toString());
+                AbDeadlineA = startA + deadlineA ;
 
                 startB = Integer.parseInt(Bstart.getText().toString());
                 computeB = Integer.parseInt(Bcomputation.getText().toString());
                 periodB = Integer.parseInt(Bperiod.getText().toString());
                 deadlineB = Integer.parseInt(Bdeadline.getText().toString());
+                AbDeadlineB = startB + deadlineB ;
+
 
                 startC = Integer.parseInt(Cstart.getText().toString());
                 computeC = Integer.parseInt(Ccomputation.getText().toString());
                 periodC = Integer.parseInt(Cperiod.getText().toString());
                 deadlineC = Integer.parseInt(Cdeadline.getText().toString());
+                AbDeadlineC = startC + deadlineC ;
+
 
                 startD = Integer.parseInt(Dstart.getText().toString());
                 computeD = Integer.parseInt(Dcomputation.getText().toString());
                 periodD = Integer.parseInt(Dperiod.getText().toString());
                 deadlineD = Integer.parseInt(Ddeadline.getText().toString());
+                AbDeadlineD = startD + deadlineD ;
 
 
-                long newId1 = myDb.insertRow ("A", startA, computeA, periodA, deadlineA);
-                long newId2 = myDb.insertRow ("B", startB, computeB, periodB, deadlineB);
-                long newId3 = myDb.insertRow ("C", startC, computeC, periodC, deadlineC);
-                long newId4 = myDb.insertRow ("D", startD, computeD, periodD, deadlineD);
+
+                long newId1 = myDb.insertRow ("A", startA, computeA, periodA, deadlineA , AbDeadlineA);
+                long newId2 = myDb.insertRow ("B", startB, computeB, periodB, deadlineB , AbDeadlineB);
+                long newId3 = myDb.insertRow ("C", startC, computeC, periodC, deadlineC , AbDeadlineC);
+                long newId4 = myDb.insertRow ("D", startD, computeD, periodD, deadlineD , AbDeadlineD);
+
 
 
             }

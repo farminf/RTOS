@@ -41,6 +41,8 @@ public class QueryViewer extends Activity {
                 int computation = cursor.getInt(DBAdapter.COL_COMPUTATION);
                 int period = cursor.getInt(DBAdapter.COL_PERIOD);
                 int deadline = cursor.getInt(DBAdapter.COL_DEADLINE);
+                int AbDeadline = cursor.getInt(DBAdapter.COL_AbDEADLINE);
+
 
 
                 // Append data to the message:
@@ -50,6 +52,7 @@ public class QueryViewer extends Activity {
                         +", Compute =" + computation
                         +", Period =" + period
                         +", deadline =" + deadline
+                        +", AbDeadline =" + AbDeadline
                         +"\n";
             } while(cursor.moveToNext());
         }
