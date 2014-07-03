@@ -14,6 +14,7 @@ public class rm extends Activity {
     TextView rm;
     DBAdapter myDb;
     int time = 0;
+    boolean feasible;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +27,20 @@ public class rm extends Activity {
 
         //Cursor c = myDb.findMin();
         String message = "";
+        feasible = true ;
         for (int i=0 ; i != 4 ; i++){
-
             Cursor c = myDb.findMinT();
             if (c.moveToFirst()) {
                 do {
                     String name = c.getString(DBAdapter.COL_NAME);
                     int computation = c.getInt(DBAdapter.COL_COMPUTATION);
+                    int period = c.getInt(DBAdapter.COL_PERIOD);
                     message += "Task" + name + " has started in time " + time + "\n";
                     time = time + computation;
                     message += "Task" + name + " has finished in time " + time +"\n";
+                    if ( period < time ){
+                        feasible = false ;
+                    }
                     myDb.deleteRowByName(name);
 
                 }while(c.moveToNext());
@@ -71,6 +76,12 @@ public class rm extends Activity {
 //
 //        }
         //c.close();
+        if (feasible == true ) {
+            message += "Task set is Feasible \n";
+        }
+        else {
+            message += "Task set is NOT Feasible \n";
+        }
         rm.setText(message);
 
 

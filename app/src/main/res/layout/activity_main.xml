@@ -112,7 +112,7 @@
                 android:ems="2"
                 android:id="@+id/ADeadline"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="2" />
 
         </TableRow>
 
@@ -134,7 +134,7 @@
                 android:ems="2"
                 android:id="@+id/BStart"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="2" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -161,7 +161,7 @@
                 android:ems="2"
                 android:id="@+id/BDeadline"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="4" />
         </TableRow>
 
         <TableRow
@@ -182,7 +182,7 @@
                 android:ems="2"
                 android:id="@+id/CStart"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="4" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -209,7 +209,7 @@
                 android:ems="2"
                 android:id="@+id/CDeadline"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="8" />
         </TableRow>
 
         <TableRow
@@ -231,7 +231,7 @@
                 android:ems="2"
                 android:id="@+id/DStart"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="6" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -258,7 +258,7 @@
                 android:ems="2"
                 android:id="@+id/DDeadline"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="5" />
         </TableRow>
 
         <TableRow

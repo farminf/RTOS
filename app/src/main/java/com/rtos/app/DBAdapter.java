@@ -124,18 +124,18 @@ public class DBAdapter {
         // Insert it into the database.
 		return db.insert(DATABASE_TABLE, null, initialValues);
 	}
-	
+//-----------------------------------------------------------------
 	// Delete a row from the database, by rowId (primary key)
 	public boolean deleteRow(long rowId) {
 		String where = KEY_ROWID + "=" + rowId;
 		return db.delete(DATABASE_TABLE, where, null) != 0;
 	}
-
+    //-----------------------------------------------------------------
     public boolean deleteRowByName(String name) {
         String where = TASK_NAME + " = " + '"' + name + '"' ;
         return db.delete(DATABASE_TABLE, where, null) != 0;
     }
-
+    //-----------------------------------------------------------------
     public Cursor findMinT(){
         //int value = 6;
         //String statement = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_PERIOD + " = " + value;
@@ -153,7 +153,63 @@ public class DBAdapter {
         }
         return cursor ;
     }
+    //-----------------------------------------------------------------
+    public int abDeadlineResult (String name){
+        String where = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_NAME + " = " + '"' + name + '"';
+        Cursor cursor = db.rawQuery(where, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor.getInt(DBAdapter.COL_AbDEADLINE);
 
+    }
+    //-----------------------------------------------------------------
+    public int computationResult (String name){
+        String where = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_NAME + " = " + '"' + name + '"';
+        Cursor cursor = db.rawQuery(where, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return  cursor.getInt(DBAdapter.COL_COMPUTATION);
+
+    }
+    //-----------------------------------------------------------------
+    public Cursor findStartT(int time){
+        String statement = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_START + " = " + time;
+        Cursor cursor = db.rawQuery(statement, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor ;
+    }
+    //-----------------------------------------------------------------
+    public Boolean computationMinusOne(String name){
+        String statement = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_NAME + " = " + '"' + name + '"';
+        String where = TASK_NAME + " = " + '"' + name + '"';
+        Cursor cursor = db.rawQuery(statement, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        int computation = cursor.getInt(DBAdapter.COL_COMPUTATION);
+        computation -- ;
+        ContentValues newValues = new ContentValues();
+        newValues.put(TASK_COMPUTATION, computation);
+        return db.update(DATABASE_TABLE, newValues, where , null) != 0;
+//        if (cursor != null) {
+//            cursor.moveToFirst();
+//        }
+        //return cursor ;
+    }
+    //-----------------------------------------------------------------
+    public int findAbDeadline(String name){
+        String where = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + TASK_NAME + " = " + '"' + name + '"';
+        Cursor cursor = db.rawQuery(where, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor.getInt(DBAdapter.COL_AbDEADLINE);
+    }
+    //-----------------------------------------------------------------
 	public void deleteAll() {
 		Cursor c = getAllRows();
 		long rowId = c.getColumnIndexOrThrow(KEY_ROWID);
@@ -164,7 +220,7 @@ public class DBAdapter {
 		}
 		c.close();
 	}
-	
+    //-----------------------------------------------------------------
 	// Return all data in the database.
 	public Cursor getAllRows() {
 		String where = null;
@@ -175,7 +231,7 @@ public class DBAdapter {
 		}
 		return c;
 	}
-
+    //-----------------------------------------------------------------
 	// Get a specific row (by rowId)
 	public Cursor getRow(long rowId) {
 		String where = KEY_ROWID + "=" + rowId;
@@ -186,7 +242,7 @@ public class DBAdapter {
 		}
 		return c;
 	}
-	
+    //-----------------------------------------------------------------
 	// Change an existing row to be equal to new data.
 	public boolean updateRow(long rowId, String taskName, int start, int computation , int period , int deadline , int AbDeadline) {
 		String where = KEY_ROWID + "=" + rowId;
@@ -209,9 +265,23 @@ public class DBAdapter {
         // Insert it into the database.
 		return db.update(DATABASE_TABLE, newValues, where, null) != 0;
 	}
-	
-	
-	
+
+    //-----------------------------------------------------------------
+    public boolean updateComputation(String taskName , int computation) {
+        String where = TASK_NAME + " = " + '"' + taskName + '"';
+        ContentValues newValues = new ContentValues();
+        newValues.put(TASK_COMPUTATION, computation);
+
+        // Insert it into the database.
+        return db.update(DATABASE_TABLE, newValues, where, null) != 0;
+    }
+
+
+
+
+
+
+
 	/////////////////////////////////////////////////////////////////////
 	//	Private Helper Classes:
 	/////////////////////////////////////////////////////////////////////
