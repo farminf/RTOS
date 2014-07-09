@@ -6,12 +6,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.rtos.app.MainActivity">
+    tools:context="com.rtos.app.MainActivity"
+    android:background="#ffebe9ea">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="160dp"
         android:layout_marginTop="36dp"
         android:stretchColumns="*">
 
@@ -264,15 +265,6 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-        </TableRow>
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -302,11 +294,20 @@
 
     </TableLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose one of the Algorithms..."
+        android:id="@+id/textView11"
+
+        android:layout_marginTop="350dp" />
+
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="370dp"
         android:id="@+id/algorithms"
         android:layout_marginBottom="40dp"
         >
@@ -344,10 +345,23 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Run"
+        android:text="RUN"
         android:id="@+id/Run"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:background="#ff5c1612"
+        android:textColor="#ffffffff"
+        android:textSize="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Real Time Operating System"
+        android:id="@+id/textView10"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ff7c200e" />
 
 </RelativeLayout>

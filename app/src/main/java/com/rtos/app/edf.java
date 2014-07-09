@@ -30,7 +30,7 @@ public class edf extends Activity {
         myDb.open();
        // Cursor cursor = myDb.getAllRows();
 
-        while(time < 30){
+        while(myDb.checkDBEmpty() != 0 ){
 
             Cursor c = myDb.findStartT(time);
             taskNumber = c.getCount();
@@ -43,7 +43,7 @@ public class edf extends Activity {
                     message += "Task " + newTaskName + " has started in time " + time + "\n";
                     CPU = newTaskName ;
                     time ++;
-                    Log.v("", "here");
+                    //Log.v("", "here");
                     myDb.computationMinusOne(newTaskName);
                     checkFinish(newTaskName);
                 }
@@ -93,8 +93,10 @@ public class edf extends Activity {
             }
 
 
-
+            c.close();
         }
+
+
         if (feasible == true ) {
             message += "Task set is Feasible \n";
         }
